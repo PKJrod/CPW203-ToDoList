@@ -8,7 +8,7 @@
 
 </head>
 <body>
-    <h1>ToDo List</h1>
+    <h1>Grocery List</h1>
 
     <form>
         <label for="grocery">Grocery item</label>
@@ -26,17 +26,19 @@
         <span>*</span>
         <br>
 
-        <input type="checkbox">
+        <input id="grabbed-item" type="checkbox">
         <label for="grabbed-item">Got the item?</label>
         <br>
 
-        <input type="button" value="Add ToDo Item">
+        <input type="button" id="add" value="Add ToDo Item">
+        <br>
     </form>
 
+    <h2>Grocery Items</h2>
+    <div id="itemBagged"></div>
+    <div id="itemWasNotBagged"></div>
+
     <script src="https://unpkg.com/js-datepicker"></script>
-    <script>
-        const picker = datepicker("#date-acquired");
-        picker.setMin(new Date()); // set to today's date
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
