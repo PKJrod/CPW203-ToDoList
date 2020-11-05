@@ -4,8 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo List App</title>
+    <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
+
 </head>
 <body>
-    
+    <h1>ToDo List</h1>
+
+    <form>
+        <label for="grocery">Grocery item</label>
+        <input type="text" id="grocery">
+        <span>*</span>
+        <br>
+
+        <label for="quantity">quantity of item</label>
+        <input type="text" id="quantity">
+        <span>*</span>
+        <br>
+
+        <label for="date-acquired">Date of acquiring item</label>
+        <input type="text" id="date-acquired">
+        <span>*</span>
+        <br>
+
+        <input type="checkbox">
+        <label for="grabbed-item">Got the item?</label>
+        <br>
+
+        <input type="button" value="Add ToDo Item">
+    </form>
+
+    <script src="https://unpkg.com/js-datepicker"></script>
+    <script>
+        const picker = datepicker("#date-acquired");
+        picker.setMin(new Date()); // set to today's date
+    </script>
 </body>
 </html>
