@@ -12,11 +12,26 @@ window.onload = function () {
 function productProcess() {
     if (isValid()) {
         var list = getToDoItem();
+        var groceryItems = "groceryList";
+        var groceryString = JSON.stringify(list);
+        localStorage.setItem(groceryItems, groceryString);
         displayToDoItem(list);
     }
 }
 function isValid() {
-    return true;
+    var isValid = true;
+    var grocery = getInputById("grocery").value;
+    if (grocery == "") {
+        isValid = false;
+        alert("must enter a product");
+    }
+    var quantity = getInputById("quantity").value;
+    var quantityAmount = parseFloat(quantity);
+    if (quantity == "" || isNaN(quantityAmount)) {
+        isValid = false;
+        alert("quantity must be present and is a number!");
+    }
+    return isValid;
 }
 function getToDoItem() {
     var myList = new ToDoItem();

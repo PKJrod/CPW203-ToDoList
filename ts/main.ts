@@ -30,6 +30,11 @@ window.onload = function() {
 function productProcess() {
     if(isValid()) {
         let list = getToDoItem();
+
+        const groceryItems = "groceryList";
+        let groceryString = JSON.stringify(list);
+        localStorage.setItem(groceryItems, groceryString);
+        
         displayToDoItem(list);
     }    
 }
@@ -37,7 +42,22 @@ function productProcess() {
  * Check form data is valid
  */
 function isValid():boolean {
-    return true;
+    let isValid = true;
+
+    let grocery = getInputById("grocery").value;
+    if(grocery == "") {
+        isValid = false;
+        alert("must enter a product")
+    }
+
+    let quantity = getInputById("quantity").value;
+    let quantityAmount = parseFloat(quantity);
+    if(quantity == "" || isNaN(quantityAmount)){
+        isValid = false;
+        alert("quantity must be present and is a number!");
+    }
+
+    return isValid;
 }
 
 /**
