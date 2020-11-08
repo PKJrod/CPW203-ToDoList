@@ -76,7 +76,12 @@ function displayToDoItem(item:ToDoItem):void {
     let itemDate = document.createElement("p");
     itemDate.innerText = item.dateAcquired.toDateString();
 
+    // ex. <div class="todo completed"></div> or <div class="todo"></div>
     let itemDiv = document.createElement("div");
+
+    itemDiv.onclick = markAsComplete;
+
+    itemDiv.classList.add("todo");
         if(item.itemGrabbed) {
             itemDiv.classList.add("completed");
         }
@@ -104,5 +109,17 @@ function getInputById(id:string):HTMLInputElement {
     return <HTMLInputElement>document.getElementById(id);
 }
 
+/**
+ * when clicking on a incomplete task it will turn to completed.
+ */
+function markAsComplete() {
+    // console.log(this) Can show what is triggering the element with the method
+
+    let itemDiv = <HTMLElement>this;
+    itemDiv.classList.add("completed");
+
+    let completedItems = document.getElementById("itemBagged");
+    completedItems.appendChild(itemDiv);
+}
 // Task: Allow user to mark a ToDoItem as completed
 // Task: Store ToDoItems in webStorage

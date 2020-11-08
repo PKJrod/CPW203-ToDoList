@@ -1,0 +1,32 @@
+.todo{
+    width: 20%;
+    box-sizing: border-box;
+    background-color: lightcoral;
+    padding: .5em;
+    border-radius: .5em;
+    margin: 1em;
+    cursor: pointer;
+}
+
+.todo h2{
+    margin: 0px;
+}
+
+.todo p{
+    margin: 0px;
+}
+
+.completed{
+    opacity: 50%;
+    background-color: lightseagreen;
+    text-decoration: line-through;
+}
+
+#itemBagged{
+    border: .1em solid blue;
+}
+
+#itemWasNotBagged{
+    border: .1em solid black;
+    margin-bottom: 1em;
+}
