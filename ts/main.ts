@@ -25,16 +25,20 @@ item.isCompleted = false;
 window.onload = function() {
     let addItem = document.getElementById("add");
     addItem.onclick = productProcess;
+
+    // Load saved items
+    loadSavedItem();
+}
+
+function loadSavedItem() {
+    let item = getToDo(); // read from storage
+    displayToDoItem(item);
 }
 
 function productProcess() {
     if(isValid()) {
         let list = getToDoItem();
-
-        const groceryItems = "groceryList";
-        let groceryString = JSON.stringify(list);
-        localStorage.setItem(groceryItems, groceryString);
-        
+        saveToDo(list);
         displayToDoItem(list);
     }    
 }
@@ -94,7 +98,9 @@ function displayToDoItem(item:ToDoItem):void {
     quantityText.innerText = item.quantity.toString();
 
     let itemDate = document.createElement("p");
-    itemDate.innerText = item.dateAcquired.toDateString();
+    // itemDate.innerText = item.dateAcquired.toDateString();
+    let dueDate = new Date(item.dateAcquired.toString());
+    itemDate.innerText = dueDate.toDateString();
 
     // ex. <div class="todo completed"></div> or <div class="todo"></div>
     let itemDiv = document.createElement("div");
@@ -143,3 +149,24 @@ function markAsComplete() {
 }
 // Task: Allow user to mark a ToDoItem as completed
 // Task: Store ToDoItems in webStorage
+
+function saveToDo(item:ToDoItem):void {
+    // Convert ToDoItem into JSON String
+    let itemString = JSON.stringify(item);
+
+    // storing single item to todo storage
+    localStorage.setItem(todokey, itemString)
+}
+
+const todokey = "todo";
+
+/**
+ * Get stored ToDo item or return null if 
+ * none is found
+ */
+function getToDo():ToDoItem{
+    let itemString = localStorage.getItem(todokey);
+    let item:ToDoItem = JSON.parse(itemString);
+
+    return item;
+}

@@ -30,3 +30,11 @@
     border: .1em solid black;
     margin-bottom: 1em;
 }
+
+#itemBagged, #itemWasNotBagged {
+    display: flex; /* flex makes the inline boxes side by side */
+    flex-direction: row; 
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: stretch;
+}
