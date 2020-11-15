@@ -1,10 +1,14 @@
+body {
+    background-color: lightgray;
+}
+
 .todo{
     width: 20%;
     box-sizing: border-box;
     background-color: lightcoral;
     padding: .5em;
     border-radius: .5em;
-    margin: 1em;
+    margin: .5em;
     cursor: pointer;
 }
 
@@ -22,19 +26,43 @@
     text-decoration: line-through;
 }
 
-#productPaid{
-    border: .1em solid blue;
+#productPaid {
+    float: right;
+    clear: right;
+    width: 49%;
 }
 
-#productNotPaid{
-    border: .1em solid black;
-    margin-bottom: 1em;
+#productNotPaid {
+    float: left;
+    clear: left;
+    width: 51%;
 }
 
 #productPaid, #productNotPaid {
     display: flex; /* flex makes the inline boxes side by side */
     flex-direction: row; 
     flex-wrap: wrap;
-    justify-content: left;
-    align-items: stretch;
+    justify-content: flex-start;
+    align-items: left;
+}
+
+#all-items > div {
+    margin-bottom: 1em;
+}
+
+#all-items > #productNotPaid > h2 {
+    margin-right: 180px;
+    margin-bottom: 100px;
+    border: 1px solid red;
+    border-radius: .5em;
+    background-color: red;
+}
+
+#all-items > #productPaid > h2 {
+    margin-right: 600px;
+    margin-bottom: 100px;
+    width: 200px;
+    border: 1px solid green;
+    border-radius: .5em;
+    background-color: green;
 }
