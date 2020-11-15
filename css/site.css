@@ -2,10 +2,32 @@ body {
     background-color: lightgray;
 }
 
+body > h1 {
+    text-align: center;
+    font-style: oblique;
+}
+
+body > h2 {
+    text-align: center;
+    font-style: oblique;
+}
+
+form {
+    margin-left: 45%;
+}
+
+form > input {
+    margin: .5em;
+}
+
+form > label {
+    font-style: oblique;
+}
+
 .todo{
     width: 20%;
     box-sizing: border-box;
-    background-color: lightcoral;
+    background-color: darkred;
     padding: .5em;
     border-radius: .5em;
     margin: .5em;
@@ -22,7 +44,7 @@ body {
 
 .completed{
     opacity: 50%;
-    background-color: lightseagreen;
+    background-color: aquamarine;
     text-decoration: line-through;
 }
 
@@ -51,7 +73,7 @@ body {
 }
 
 #all-items > #productNotPaid > h2 {
-    margin-right: 180px;
+    margin-right: 190px;
     margin-bottom: 100px;
     border: 1px solid red;
     border-radius: .5em;

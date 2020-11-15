@@ -18,6 +18,7 @@ function loadSavedItems() {
     }
 }
 function productProcess() {
+    resetErrorMessages();
     if (isValid()) {
         var list = getToDoItem();
         saveToDo(list);
@@ -29,13 +30,18 @@ function isValid() {
     var purchases = getInputById("purchases").value;
     if (purchases == "") {
         isValid = false;
-        alert("must enter a product");
+        isTextPresent("purchases", "Must enter a product");
     }
     var price = getInputById("dollaramount").value;
     var priceAmount = parseFloat(price);
     if (price == "" || isNaN(priceAmount)) {
         isValid = false;
-        alert("price must be present if it was free please add a 0!");
+        isTextPresent("dollaramount", "price must be present if it was free please add a 0!");
+    }
+    var date = getInputById("date-acquired").value;
+    if (date == "") {
+        isValid = false;
+        isTextPresent("date-acquired", "Must enter a valid date");
     }
     return isValid;
 }
@@ -100,4 +106,25 @@ function getToDoItems() {
     var itemString = localStorage.getItem(todokey);
     var item = JSON.parse(itemString);
     return item;
+}
+function isTextPresent(id, errMsg) {
+    var txtBox = document.getElementById(id);
+    var txtBoxValue = txtBox.value;
+    if (txtBoxValue == "") {
+        var errSpan = txtBox.nextElementSibling;
+        errSpan.innerText = errMsg;
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+function resetErrorMessages() {
+    var allSpans = document.querySelectorAll("form span");
+    for (var i = 0; i < allSpans.length; i++) {
+        var currSpan = allSpans[i];
+        if (currSpan.hasAttribute("required")) {
+            currSpan.innerText = "*";
+        }
+    }
 }

@@ -40,11 +40,13 @@ function loadSavedItems() {
 }
 
 function productProcess() {
+    
+    resetErrorMessages();
     if(isValid()) {
         let list = getToDoItem();
         saveToDo(list);
         displayToDoItem(list);
-    }    
+    } 
 }
 /**
  * Check form data is valid
@@ -55,14 +57,20 @@ function isValid():boolean {
     let purchases = getInputById("purchases").value;
     if(purchases == "") {
         isValid = false;
-        alert("must enter a product")
+        isTextPresent("purchases", "Must enter a product")
     }
 
     let price = getInputById("dollaramount").value;
     let priceAmount = parseFloat(price);
     if(price == "" || isNaN(priceAmount)){
         isValid = false;
-        alert("price must be present if it was free please add a 0!");
+        isTextPresent("dollaramount", "price must be present if it was free please add a 0!");
+    }
+
+    let date = getInputById("date-acquired").value;
+    if(date == "") {
+        isValid = false;
+        isTextPresent("date-acquired", "Must enter a valid date");
     }
 
     return isValid;
@@ -187,4 +195,40 @@ function getToDoItems():ToDoItem[]{
     let item:ToDoItem[] = JSON.parse(itemString);
 
     return item;
+}
+
+/**
+ * Returns true if the textbox with the given id has
+ * some text inside it
+ * @param id The id of the <input type="text"> to validate
+ * @param errMsg The message to display in the sibling span of 
+ * the textbox
+ */
+function isTextPresent(id:string, errMsg:string):boolean {
+    let txtBox = 
+        <HTMLInputElement>document.getElementById(id);
+    let txtBoxValue = txtBox.value;
+    if( txtBoxValue == "" ) {
+        let errSpan = 
+            <HTMLSpanElement>txtBox.nextElementSibling;
+        errSpan.innerText = errMsg;
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+/**
+ * Resets all spans back to the default text
+ */
+function resetErrorMessages():void {
+    let allSpans = document.querySelectorAll("form span");
+    for( let i = 0; i < allSpans.length; i++ ) {
+        let currSpan = <HTMLElement>allSpans[i];
+            
+        if(currSpan.hasAttribute("required")) {
+            currSpan.innerText = "*"
+        }
+    }
 }
