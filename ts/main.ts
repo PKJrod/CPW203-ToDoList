@@ -3,10 +3,10 @@ const picker = datepicker("#date-acquired");
 picker.setMin(new Date()); // set to today's date
 
 class ToDoItem{
-    grocery:string;
-    quantity:Number;
+    purchases:string;
+    price:Number;
     dateAcquired:Date;
-    itemGrabbed:boolean;
+    itemPaid:boolean;
 
     /*
     constructor(desiredGrocery:string) {
@@ -52,17 +52,17 @@ function productProcess() {
 function isValid():boolean {
     let isValid = true;
 
-    let grocery = getInputById("grocery").value;
-    if(grocery == "") {
+    let purchases = getInputById("purchases").value;
+    if(purchases == "") {
         isValid = false;
         alert("must enter a product")
     }
 
-    let quantity = getInputById("quantity").value;
-    let quantityAmount = parseFloat(quantity);
-    if(quantity == "" || isNaN(quantityAmount)){
+    let price = getInputById("dollaramount").value;
+    let priceAmount = parseFloat(price);
+    if(price == "" || isNaN(priceAmount)){
         isValid = false;
-        alert("quantity must be present and is a number!");
+        alert("price must be present if it was free please add a 0!");
     }
 
     return isValid;
@@ -76,17 +76,17 @@ function getToDoItem():ToDoItem {
 
     let myList = new ToDoItem();
     
-    let groceryInput = getInputById("grocery");
-    myList.grocery = groceryInput.value;
+    let purchaseInput = getInputById("purchases");
+    myList.purchases = purchaseInput.value;
 
-    let quantityInput = getInputById("quantity");
-    myList.quantity = parseInt(quantityInput.value);
+    let priceInput = getInputById("dollaramount");
+    myList.price = parseFloat(priceInput.value);
 
     let dateAcquiredInput = getInputById("date-acquired");
     myList.dateAcquired = new Date(dateAcquiredInput.value);
 
-    let itemGrabbed = getInputById("grabbed-item");
-    myList.itemGrabbed = itemGrabbed.checked;
+    let itemPaid = getInputById("paid");
+    myList.itemPaid = itemPaid.checked;
 
     return myList;
 }
@@ -95,11 +95,11 @@ function getToDoItem():ToDoItem {
  * Display given ToDoItem on the web page
  */
 function displayToDoItem(item:ToDoItem):void {
-    let groceryText = document.createElement("h3");
-    groceryText.innerText = item.grocery;
+    let purchaseText = document.createElement("h3");
+    purchaseText.innerText = item.purchases;
 
-    let quantityText = document.createElement("p");
-    quantityText.innerText = item.quantity.toString();
+    let priceText = document.createElement("p");
+    priceText.innerText = "$" + item.price.toString();
 
     let itemDate = document.createElement("p");
     // itemDate.innerText = item.dateAcquired.toDateString();
@@ -111,21 +111,21 @@ function displayToDoItem(item:ToDoItem):void {
 
     itemDiv.onclick = markAsComplete;
 
-    itemDiv.classList.add("todo");
-        if(item.itemGrabbed) {
+    itemDiv.classList.add(todokey);
+        if(item.itemPaid || item.price == 0) {
             itemDiv.classList.add("completed");
         }
 
-    itemDiv.appendChild(groceryText);
-    itemDiv.appendChild(quantityText);
+    itemDiv.appendChild(purchaseText);
+    itemDiv.appendChild(priceText);
     itemDiv.appendChild(itemDate);
 
-    if(item.itemGrabbed) {
-        let completeCapture = document.getElementById("itemBagged");
+    if(item.itemPaid || item.price == 0) {
+        let completeCapture = document.getElementById("productPaid");
         completeCapture.appendChild(itemDiv);
     }
     else {
-        let incompleteCapture = document.getElementById("itemWasNotBagged");
+        let incompleteCapture = document.getElementById("productNotPaid");
         incompleteCapture.appendChild(itemDiv);
     }
 
@@ -148,7 +148,7 @@ function markAsComplete() {
     let itemDiv = <HTMLElement>this;
     itemDiv.classList.add("completed");
 
-    let completedItems = document.getElementById("itemBagged");
+    let completedItems = document.getElementById("productPaid");
     completedItems.appendChild(itemDiv);
 }
 // Task: Allow user to mark a ToDoItem as completed

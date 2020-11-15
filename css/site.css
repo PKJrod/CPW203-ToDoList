@@ -22,16 +22,16 @@
     text-decoration: line-through;
 }
 
-#itemBagged{
+#productPaid{
     border: .1em solid blue;
 }
 
-#itemWasNotBagged{
+#productNotPaid{
     border: .1em solid black;
     margin-bottom: 1em;
 }
 
-#itemBagged, #itemWasNotBagged {
+#productPaid, #productNotPaid {
     display: flex; /* flex makes the inline boxes side by side */
     flex-direction: row; 
     flex-wrap: wrap;

@@ -26,54 +26,54 @@ function productProcess() {
 }
 function isValid() {
     var isValid = true;
-    var grocery = getInputById("grocery").value;
-    if (grocery == "") {
+    var purchases = getInputById("purchases").value;
+    if (purchases == "") {
         isValid = false;
         alert("must enter a product");
     }
-    var quantity = getInputById("quantity").value;
-    var quantityAmount = parseFloat(quantity);
-    if (quantity == "" || isNaN(quantityAmount)) {
+    var price = getInputById("dollaramount").value;
+    var priceAmount = parseFloat(price);
+    if (price == "" || isNaN(priceAmount)) {
         isValid = false;
-        alert("quantity must be present and is a number!");
+        alert("price must be present if it was free please add a 0!");
     }
     return isValid;
 }
 function getToDoItem() {
     var myList = new ToDoItem();
-    var groceryInput = getInputById("grocery");
-    myList.grocery = groceryInput.value;
-    var quantityInput = getInputById("quantity");
-    myList.quantity = parseInt(quantityInput.value);
+    var purchaseInput = getInputById("purchases");
+    myList.purchases = purchaseInput.value;
+    var priceInput = getInputById("dollaramount");
+    myList.price = parseFloat(priceInput.value);
     var dateAcquiredInput = getInputById("date-acquired");
     myList.dateAcquired = new Date(dateAcquiredInput.value);
-    var itemGrabbed = getInputById("grabbed-item");
-    myList.itemGrabbed = itemGrabbed.checked;
+    var itemPaid = getInputById("paid");
+    myList.itemPaid = itemPaid.checked;
     return myList;
 }
 function displayToDoItem(item) {
-    var groceryText = document.createElement("h3");
-    groceryText.innerText = item.grocery;
-    var quantityText = document.createElement("p");
-    quantityText.innerText = item.quantity.toString();
+    var purchaseText = document.createElement("h3");
+    purchaseText.innerText = item.purchases;
+    var priceText = document.createElement("p");
+    priceText.innerText = "$" + item.price.toString();
     var itemDate = document.createElement("p");
     var dueDate = new Date(item.dateAcquired.toString());
     itemDate.innerText = dueDate.toDateString();
     var itemDiv = document.createElement("div");
     itemDiv.onclick = markAsComplete;
-    itemDiv.classList.add("todo");
-    if (item.itemGrabbed) {
+    itemDiv.classList.add(todokey);
+    if (item.itemPaid || item.price == 0) {
         itemDiv.classList.add("completed");
     }
-    itemDiv.appendChild(groceryText);
-    itemDiv.appendChild(quantityText);
+    itemDiv.appendChild(purchaseText);
+    itemDiv.appendChild(priceText);
     itemDiv.appendChild(itemDate);
-    if (item.itemGrabbed) {
-        var completeCapture = document.getElementById("itemBagged");
+    if (item.itemPaid || item.price == 0) {
+        var completeCapture = document.getElementById("productPaid");
         completeCapture.appendChild(itemDiv);
     }
     else {
-        var incompleteCapture = document.getElementById("itemWasNotBagged");
+        var incompleteCapture = document.getElementById("productNotPaid");
         incompleteCapture.appendChild(itemDiv);
     }
 }
@@ -83,7 +83,7 @@ function getInputById(id) {
 function markAsComplete() {
     var itemDiv = this;
     itemDiv.classList.add("completed");
-    var completedItems = document.getElementById("itemBagged");
+    var completedItems = document.getElementById("productPaid");
     completedItems.appendChild(itemDiv);
 }
 function saveToDo(item) {

@@ -9,16 +9,17 @@
 
 </head>
 <body>
-    <h1>Grocery List</h1>
+    <h1>Pandora Credit</h1>
+    <h2>Manage all your psychotic purchases</h2>
 
     <form>
-        <label for="grocery">Grocery item</label>
-        <input type="text" id="grocery">
+        <label for="purchases">Transactions</label>
+        <input type="text" id="purchases">
         <span>*</span>
         <br>
 
-        <label for="quantity">quantity of item</label>
-        <input type="text" id="quantity">
+        <label for="dollaramount">Amount Owed</label>
+        <input type="text" id="dollaramount">
         <span>*</span>
         <br>
 
@@ -27,8 +28,8 @@
         <span>*</span>
         <br>
 
-        <input id="grabbed-item" type="checkbox">
-        <label for="grabbed-item">Got the item?</label>
+        <input id="paid" type="checkbox">
+        <label for="paid">made payments on it?</label>
         <br>
 
         <input type="button" id="add" value="Add ToDo Item">
@@ -37,8 +38,8 @@
 
     <h2>Grocery Items</h2>
     <div id="all-items">
-        <div id="itemWasNotBagged"></div>
-        <div id="itemBagged"></div>
+        <div id="productNotPaid">All transactions are due before 27th of each month</div>
+        <div id="productPaid">Paid in Full</div>
     </div>
     
     <script src="https://unpkg.com/js-datepicker"></script>
