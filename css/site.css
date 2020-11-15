@@ -20,6 +20,14 @@ form > input {
     margin: .5em;
 }
 
+form > #dollaramount {
+    margin-left: 0em;
+}
+
+#currency {
+    margin-left: .3em;
+}
+
 form > label {
     font-style: oblique;
 }
